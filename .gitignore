@@ -1,0 +1,174 @@
+
+*.vsidx
+
+TD 2/include/cppitertools/WORKSPACE
+
+TD 2/include/gsl/span_ext
+
+TD 2/include/gsl/string_span
+
+TD 2/TD2_INF1015_H23.sln
+
+TD 2/td2.vcxproj
+
+TD 2/td2.vcxproj.filters
+
+TD 2/verification_allocation.cpp
+
+TD 2/verification_allocation.hpp
+
+TD 2/include/cppitertools/dropwhile.hpp
+
+TD 2/include/cppitertools/enumerate.hpp
+
+TD 2/include/cppitertools/filter.hpp
+
+TD 2/include/cppitertools/filterfalse.hpp
+
+TD 2/include/cppitertools/groupby.hpp
+
+TD 2/include/cppitertools/imap.hpp
+
+TD 2/include/cppitertools/internal/iter_tuples.hpp
+
+TD 2/include/cppitertools/internal/iterator_wrapper.hpp
+
+TD 2/include/cppitertools/internal/iteratoriterator.hpp
+
+TD 2/include/cppitertools/internal/iterbase.hpp
+
+TD 2/include/cppitertools/itertools.hpp
+
+TD 2/include/cppitertools/LICENSE.md
+
+TD 2/include/cppitertools/permutations.hpp
+
+TD 2/include/cppitertools/powerset.hpp
+
+TD 2/include/cppitertools/product.hpp
+
+TD 2/include/cppitertools/range.hpp
+
+TD 2/include/cppitertools/README.md
+
+TD 2/include/cppitertools/repeat.hpp
+
+TD 2/include/cppitertools/reversed.hpp
+
+TD 2/include/cppitertools/slice.hpp
+
+TD 2/include/cppitertools/sliding_window.hpp
+
+TD 2/include/cppitertools/sorted.hpp
+
+TD 2/include/cppitertools/starmap.hpp
+
+TD 2/include/cppitertools/takewhile.hpp
+
+TD 2/include/cppitertools/unique_everseen.hpp
+
+TD 2/include/cppitertools/unique_justseen.hpp
+
+TD 2/include/cppitertools/zip_longest.hpp
+
+TD 2/include/cppitertools/zip.hpp
+
+TD 2/include/gsl/gsl
+
+TD 2/include/gsl/gsl_algorithm
+
+TD 2/include/gsl/gsl_assert
+
+TD 2/include/gsl/gsl_byte
+
+TD 2/include/gsl/gsl_util
+
+TD 2/include/gsl/multi_span
+
+TD 2/include/gsl/pointers
+
+TD 2/include/gsl/span
+
+TD 2/.vs/TD2_INF1015_H23/FileContentIndex/read.lock
+
+TD 2/.vs/TD2_INF1015_H23/v17/.suo
+
+TD 2/.vs/TD2_INF1015_H23/v17/Browse.VC.db
+
+TD 2/.vs/TD2_INF1015_H23/v17/Browse.VC.db-shm
+
+TD 2/.vs/TD2_INF1015_H23/v17/Browse.VC.db-wal
+
+TD 2/.vs/TD2_INF1015_H23/v17/Browse.VC.opendb
+
+TD 2/.vs/TD2_INF1015_H23/v17/ipch/AutoPCH/13290e8c0a1b1632/BIBLIOTHEQUE_COURS.ipch
+
+TD 2/.vs/TD2_INF1015_H23/v17/ipch/AutoPCH/922e5066e0183328/VERIFICATION_ALLOCATION.ipch
+
+TD 2/.vs/TD2_INF1015_H23/v17/ipch/AutoPCH/c3be9117d3fc3008/TD2.ipch
+
+TD 2/bibliotheque_cours.cpp
+
+TD 2/bibliotheque_cours.hpp
+
+TD 2/CodeCoverage_bugfix.h
+
+TD 2/include/cppitertools/cycle.hpp
+
+TD 2/include/cppitertools/BUILD
+
+TD 2/include/cppitertools/chain.hpp
+
+TD 2/include/cppitertools/chunked.hpp
+
+TD 2/include/cppitertools/combinations_with_replacement.hpp
+
+TD 2/include/cppitertools/combinations.hpp
+
+TD 2/include/cppitertools/compress.hpp
+
+TD 2/include/cppitertools/count.hpp
+
+TD 2/include/cppitertools/accumulate.hpp
+
+TD 2/debogage_memoire.hpp
+
+TD 2/films.bin
+
+TD 2/include/cppitertools/.clang-format
+
+TD 2/Debug/bibliotheque_cours.obj
+
+TD 2/Debug/td2.exe
+
+TD 2/Debug/td2.exe.recipe
+
+TD 2/Debug/td2.log
+
+TD 2/Debug/td2.obj
+
+TD 2/Debug/td2.pdb
+
+TD 2/Debug/td2.tlog/CL.command.1.tlog
+
+TD 2/Debug/td2.tlog/CL.read.1.tlog
+
+TD 2/Debug/td2.tlog/CL.write.1.tlog
+
+TD 2/Debug/td2.tlog/link.command.1.tlog
+
+TD 2/Debug/td2.tlog/link.read.1.tlog
+
+TD 2/Debug/td2.tlog/link.write.1.tlog
+
+TD 2/Debug/td2.tlog/td2.lastbuildstate
+
+TD 2/Debug/td2.vcxproj.FileListAbsolute.txt
+
+TD 2/Debug/vc143.pdb
+
+TD 2/Debug/verification_allocation.obj
+
+TD 2/td2.vcxproj.user
+
+TD 2/Debug/td2.Build.CppClean.log
