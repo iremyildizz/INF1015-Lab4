@@ -15,6 +15,7 @@
 #include <limits>
 #include <algorithm>
 #include <sstream>
+#include <iomanip>
 #include "cppitertools/range.hpp"
 #include "gsl/span"
 #include "debogage_memoire.hpp"        // Ajout des numéros de ligne des "new" dans le rapport de fuites.  Doit être après les include du système, qui peuvent utiliser des "placement new" (non supporté par notre ajout de numéros de lignes).
@@ -193,6 +194,39 @@ ostream& operator<< (ostream& os, const Film& film)
 	return os;
 }
 //]
+void lireLivre(string nomFichier, vector<Item*>& biblio) {
+	string ligne = "";
+	ifstream fichier(nomFichier, ios::binary);
+
+	while (getline(fichier, ligne)) {
+		Livre* livre = new Livre;
+		istringstream ss(ligne);
+		string        partieDeLigne;
+		getline(ss, partieDeLigne, '\t');
+		string titre;
+		istringstream ssTitre(partieDeLigne);
+		ssTitre >> quoted(titre);
+		livre->setTitre(titre);
+
+		getline(ss, partieDeLigne, '\t');
+		livre->setAnneeSortie(stoi(partieDeLigne));
+
+		getline(ss, partieDeLigne, '\t');
+		string auteur;
+		istringstream ssAuteur(partieDeLigne);
+		ssAuteur >> quoted(auteur);
+
+		getline(ss, partieDeLigne, '\t');
+		livre->millionsDeCopiesVendues = (stoi(partieDeLigne));
+
+		getline(ss, partieDeLigne, '\t');
+		livre->nombreDePages = (stoi(partieDeLigne));
+		
+		cout << "Création Livre " << livre->getTitre() << endl;
+		biblio.push_back(livre);
+		delete livre;
+	}
+}
 
 // Pas demandé dans l'énoncé de tout mettre les affichages avec surcharge, mais pourquoi pas.
 ostream& operator<< (ostream& os, const ListeFilms& listeFilms)
@@ -214,8 +248,16 @@ int main()
 	bibliotheque_cours::activerCouleursAnsi();  // Permet sous Windows les "ANSI escape code" pour changer de couleurs https://en.wikipedia.org/wiki/ANSI_escape_code ; les consoles Linux/Mac les supportent normalement par défaut.
 
 	static const string ligneDeSeparation = "\n\033[35m════════════════════════════════════════\033[0m\n";
-
+	
 	ListeFilms listeFilms = creerListe("films.bin");
+	vector<Item*> bibliotheque;
+	for (Film* film : listeFilms.enSpan()) {
+		bibliotheque.push_back(film);
+	}
+
+	lireLivre("livres.txt", bibliotheque);
+
+
 	
 	cout << ligneDeSeparation << "Le premier film de la liste est:" << endl;
 	// Le premier film de la liste.  Devrait être Alien.
