@@ -1,5 +1,10 @@
-﻿// Solutionnaire du TD3 INF1015 hiver 2023
-// Par Francois-R.Boyer@PolyMtl.ca
+﻿/**
+* TD 4.
+* \file   structures.hpp
+* \author Irem et Albert
+* \date   22 Mars 2023
+* Créé le 25 Fevrier 2023
+*/
 
 #pragma region "Includes"//{
 #define _CRT_SECURE_NO_WARNINGS // On permet d'utiliser les fonctions de copies de chaînes qui sont considérées non sécuritaires.

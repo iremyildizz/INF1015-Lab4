@@ -1,7 +1,10 @@
-﻿// Solutionnaire du TD3 INF1015 hiver 2023
-// Par Francois-R.Boyer@PolyMtl.ca
-#pragma once
-// Structures mémoires pour une collection de films.
+﻿/**
+* TD 4.
+* \file   structures.hpp
+* \author Irem et Albert
+* \date   22 Mars 2023
+* Créé le 25 Fevrier 2023
+*/
 
 #include <string>
 #include <memory>
