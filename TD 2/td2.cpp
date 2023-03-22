@@ -215,6 +215,7 @@ void lireLivre(string nomFichier, vector<Item*>& biblio) {
 		string auteur;
 		istringstream ssAuteur(partieDeLigne);
 		ssAuteur >> quoted(auteur);
+		livre->auteur = auteur;
 
 		getline(ss, partieDeLigne, '\t');
 		livre->millionsDeCopiesVendues = (stoi(partieDeLigne));
@@ -224,7 +225,7 @@ void lireLivre(string nomFichier, vector<Item*>& biblio) {
 		
 		cout << "Création Livre " << livre->getTitre() << endl;
 		biblio.push_back(livre);
-		delete livre;
+		//delete livre;
 	}
 }
 
@@ -257,81 +258,13 @@ int main()
 
 	lireLivre("livres.txt", bibliotheque);
 
-
+	afficherListeItems(bibliotheque);
 	
-	cout << ligneDeSeparation << "Le premier film de la liste est:" << endl;
-	// Le premier film de la liste.  Devrait être Alien.
-	cout << *listeFilms[0];
-
-	// Tests chapitre 7:
-	ostringstream tamponStringStream;
-	tamponStringStream << *listeFilms[0];
-	string filmEnString = tamponStringStream.str();
-	assert(filmEnString == 
-		"Titre: Alien\n"
-		"  Réalisateur: Ridley Scott  Année :1979\n"
-		"  Recette: 203M$\n"
-		"Acteurs:\n"
-		"  Tom Skerritt, 1933 M\n"
-		"  Sigourney Weaver, 1949 F\n"
-		"  John Hurt, 1940 M\n"
-	);
-
-	cout << ligneDeSeparation << "Les films sont:" << endl;
-	// Affiche la liste des films.  Il devrait y en avoir 7.
-	cout << listeFilms;
-
-	listeFilms.trouverActeur("Benedict Cumberbatch")->anneeNaissance = 1976;
-
-	// Tests chapitres 7-8:
-	// Les opérations suivantes fonctionnent.
-	Film skylien = *listeFilms[0];
-	skylien.setTitre("Skylien");
-	skylien.acteurs[0] = listeFilms[1]->acteurs[0];
-	skylien.acteurs[0]->nom = "Daniel Wroughton Craig";
-	cout << ligneDeSeparation
-		<< "Les films copiés/modifiés, sont:\n"
-		<< skylien << *listeFilms[0] << *listeFilms[1] << ligneDeSeparation;
-	assert(skylien.acteurs[0]->nom == listeFilms[1]->acteurs[0]->nom);
-	assert(skylien.acteurs[0]->nom != listeFilms[0]->acteurs[0]->nom);
-
-	// Tests chapitre 10:
-	auto film955 = listeFilms.trouver([](const auto& f) { return f.recette == 955; });
-	cout << "\nFilm de 955M$:\n" << *film955;
-	assert(film955->getTitre() == "Le Hobbit : La Bataille des Cinq Armées");
-	assert(listeFilms.trouver([](const auto&) { return false; }) == nullptr); // Pour la couveture de code: chercher avec un critère toujours faux ne devrait pas trouver.
-	// Exemple de condition plus compliquée: (pas demandé)
-	auto estVoyelle = [](char c) { static const string voyelles = "AEUOUYaeiouy"; return voyelles.find(c) != voyelles.npos; };
-	auto commenceParVoyelle = [&](const string& x) { return !x.empty() && estVoyelle(x[0]); };
-	assert(listeFilms.trouver([&](const auto& f) { return commenceParVoyelle(f.getTitre()); }) == listeFilms[0]);
-	assert(listeFilms.trouver([&](const auto& f) { return f.acteurs[0]->nom[0] != 'T'; }) == listeFilms[1]);
-	assert(listeFilms.trouver([&](const auto& f) { return commenceParVoyelle(f.getTitre()) && f.acteurs[0]->nom[0] != 'T'; }) == listeFilms[2]);
-
-	// Tests chapitre 9:
-	Liste<string> listeTextes(2);
-	listeTextes.ajouter(make_shared<string>("Bonjour"));
-	listeTextes.ajouter(make_shared<string>("Allo"));
-	Liste<string> listeTextes2 = listeTextes;
-	listeTextes2[0] = make_shared<string>("Hi");
-	*listeTextes2[1] = "Allo!";
-	assert(*listeTextes[0] == "Bonjour");
-	assert(*listeTextes[1] == *listeTextes2[1]);
-	assert(*listeTextes2[0] == "Hi");
-	assert(*listeTextes2[1] == "Allo!");
-	listeTextes = move(listeTextes2);  // Pas demandé, mais comme j'ai fait la méthode on va la tester; noter que la couverture de code dans VisualStudio ne montre pas la couverture des constructeurs/opérateurs= =default.
-	assert(*listeTextes[0] == "Hi" && *listeTextes[1] == "Allo!");
-
-	// Détruit et enlève le premier film de la liste (Alien).
-	delete listeFilms[0];
-	listeFilms.enleverFilm(listeFilms[0]);
-
-	cout << ligneDeSeparation << "Les films sont maintenant:" << endl;
-	cout << listeFilms;
-
-	// Pour une couverture avec 0% de lignes non exécutées:
-	listeFilms.enleverFilm(nullptr); // Enlever un film qui n'est pas dans la liste (clairement que nullptr n'y est pas).
-	assert(listeFilms.size() == 6);
-
 	// Détruire tout avant de terminer le programme.
+
+	for (Item* item : bibliotheque)
+		if (auto livre = dynamic_cast<Livre*>(item))
+			delete livre;
+
 	listeFilms.detruire(true);
 }

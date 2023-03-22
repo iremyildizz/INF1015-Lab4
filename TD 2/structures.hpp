@@ -8,13 +8,22 @@
 #include <functional>
 #include <cassert>
 #include "gsl/span"
+#include <iostream>
 using gsl::span;
 using namespace std;
 
 struct Film; struct Acteur; // Permet d'utiliser les types alors qu'ils seront défini après.
-
-class Item {
+class Affichable {
 public:
+	virtual ~Affichable() = default;
+	friend ostream& operator<<(ostream& os, const Affichable& affichable) {
+		return os << affichable.afficher() << endl;
+	}
+	virtual string afficher() const = 0;
+};
+class Item : public Affichable {
+public:
+	virtual ~Item() = default;
 	string getTitre() {
 		return titre;
 	};
@@ -33,9 +42,19 @@ public:
 	void setAnneeSortie(int noveauAnnee) {
 		anneeSortie = noveauAnnee;
 	}
+	string afficher() const override {
+		const string ligneDeSeparation = "----------------------------------------------";
+		string details = "Titre: " + titre + "\n" +
+			"  Annee: " + to_string(anneeSortie) + "\n";
+			return ligneDeSeparation + "\n" + details;
+	}
 protected:
 	string titre;
 	int anneeSortie = 0;
+};
+struct Acteur
+{
+	string nom; int anneeNaissance = 0; char sexe = '\0';
 };
 
 class ListeFilms {
@@ -101,20 +120,53 @@ private:
 
 using ListeActeurs = Liste<Acteur>;
 
-struct Film : public Item
+struct Film : virtual public Item
 {
+	virtual ~Film() = default;
+
 	string realisateur; // Titre et nom du réalisateur (on suppose qu'il n'y a qu'un réalisateur).
 	int recette=0; // Année de sortie et recette globale du film en millions de dollars
 	ListeActeurs acteurs;
+
+	string nomsActeurs() const {
+		string nomActeurs = "Acteurs: ";
+		for (const shared_ptr<Acteur>& acteur : acteurs.enSpan()) {
+			nomActeurs += acteur->nom + ", " + to_string(acteur->anneeNaissance) + ", " + acteur->sexe;
+		}
+		return nomActeurs;
+	}
+
+	string detailFilm() const {
+		return (" Realisateur: " + realisateur + "\n" +
+			"  Recette: " + to_string(recette) + "M$\n");
+	}
+
+	string afficher() const override {
+		return Item::afficher() + detailFilm() + nomsActeurs();
+	}
 };
 
-struct Livre : public Item
+struct Livre : virtual public Item
 {
+	virtual ~Livre() = default;
 	string auteur;
-	int millionsDeCopiesVendues, nombreDePages;
+	int millionsDeCopiesVendues = 0, nombreDePages = 0;
+
+	string detailLivre() const {
+		return(" Auteur: " + auteur + "\n" +
+			" Millions de copies vendues: " + to_string(millionsDeCopiesVendues)+"\n" +
+			" Nombre de pages: " + to_string(nombreDePages));
+	}
+
+	string afficher() const override {
+		return Item::afficher() + detailLivre();
+	}
 };
 
-struct Acteur
-{
-	string nom; int anneeNaissance=0; char sexe='\0';
-};
+void afficherListeItems(const vector<Item*> list) {
+	for (Item* elem : list) {
+		cout << *elem;
+	}
+
+}
+
