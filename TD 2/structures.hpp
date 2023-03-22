@@ -24,19 +24,19 @@ public:
 class Item : public Affichable {
 public:
 	virtual ~Item() = default;
-	string getTitre() {
+	virtual string getTitre() {
 		return titre;
 	};
-	string getTitre() const {
+	virtual string getTitre() const {
 		return titre;
 	};
 	void setTitre(string nouveauTitre) {
 		titre = nouveauTitre;
 	}
-	int getAnneeSortie() {
+	virtual int getAnneeSortie() {
 		return anneeSortie;
 	}
-	int getAnneeSortie() const {
+	virtual int getAnneeSortie() const {
 		return anneeSortie;
 	}
 	void setAnneeSortie(int noveauAnnee) {
@@ -161,6 +161,31 @@ struct Livre : virtual public Item
 	string afficher() const override {
 		return Item::afficher() + detailLivre();
 	}
+};
+
+struct FilmLivre : public Film, public Livre {
+public:
+	FilmLivre() = default;
+
+	FilmLivre(Film* film, Livre* livre) {
+		this->Film::setTitre(film->getTitre());
+		this->Film::setAnneeSortie(film->getAnneeSortie());
+
+		realisateur = film->realisateur;
+		recette = film->recette;
+		acteurs = Liste<Acteur>::Liste(film->acteurs);
+
+		auteur = livre->auteur;
+		millionsDeCopiesVendues = livre->millionsDeCopiesVendues;
+		nombreDePages = livre->nombreDePages;
+	}
+
+	virtual ~FilmLivre() = default;
+
+	string afficher() const override {
+		return (Film::afficher() + " \n Livre: " + detailLivre());
+	}
+
 };
 
 void afficherListeItems(const vector<Item*> list) {

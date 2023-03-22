@@ -258,12 +258,15 @@ int main()
 
 	lireLivre("livres.txt", bibliotheque);
 
+	FilmLivre filmlivre = FilmLivre(dynamic_cast<Film*> (bibliotheque[4]), dynamic_cast<Livre*> (bibliotheque[9]));
+	bibliotheque.push_back(&filmlivre);
+
 	afficherListeItems(bibliotheque);
 	
 	// Détruire tout avant de terminer le programme.
 
-	for (Item* item : bibliotheque)
-		if (auto livre = dynamic_cast<Livre*>(item))
+	for (int i = 0; i < (bibliotheque.size() - 1); i++)
+		if (auto livre = dynamic_cast<Livre*>(bibliotheque[i]))
 			delete livre;
 
 	listeFilms.detruire(true);
